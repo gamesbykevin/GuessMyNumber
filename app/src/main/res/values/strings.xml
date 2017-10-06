@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">GuessMyNumber</string>
+    <string name="speech_prompt">Speak a # 1 - 100</string>
+    <string name="speech_not_supported">Speech not supported</string>
+    <string name="guess_higher">Higher</string>
+    <string name="guess_lower">Lower</string>
+    <string name="guess_correct">Correct!! Attempts - </string>
+    <string name="instructions">Guess a # 1 - 100</string>
+</resources>
