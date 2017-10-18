@@ -71,6 +71,13 @@ public class MainActivity extends Activity {
                         System.out.println(tmp);
                     }
 
+                    for (String tmp : result) {
+
+                        //if we speak exit, go back to the previous page
+                        if (tmp.trim().equalsIgnoreCase("exit"))
+                            super.onBackPressed();
+                    }
+
                     //loop through each result to find our number guess
                     for (String tmp : result) {
 
