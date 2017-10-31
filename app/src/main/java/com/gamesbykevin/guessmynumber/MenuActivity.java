@@ -14,8 +14,18 @@ public class MenuActivity extends Activity {
     }
 
     public void onClickStartGame(View view) {
+
         //create our intent, where we want to go
         Intent intent = new Intent(MenuActivity.this, MainActivity.class);
+
+        //start the activity
+        startActivity(intent);
+    }
+
+    public void onClickOptions(View view) {
+
+        //create our intent, where we want to go
+        Intent intent = new Intent(MenuActivity.this, OptionsActivity.class);
 
         //start the activity
         startActivity(intent);

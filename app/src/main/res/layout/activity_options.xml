@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.gamesbykevin.guessmynumber.OptionsActivity">
+
+    <!-- vibrate setting on/off -->
+    <ToggleButton
+        android:id="@+id/buttonVibrate"
+        android:textOn="Vibrate On"
+        android:textOff="Vibrate Off"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- input setting speak/type -->
+    <ToggleButton
+        android:id="@+id/buttonInput"
+        android:textOn="Input: Speak"
+        android:textOff="Input: Keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- random number range -->
+    <EditText
+        android:id="@+id/textRandom"
+        android:text="100"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

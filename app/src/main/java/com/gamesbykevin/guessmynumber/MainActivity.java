@@ -2,9 +2,15 @@ package com.gamesbykevin.guessmynumber;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.speech.RecognizerIntent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +29,15 @@ public class MainActivity extends Activity {
     //our random number we are going to generate
     private int random;
 
+    //do we vibrate the phone when the number is entered correctly
+    private boolean vibrate = false;
+
+    //do we speak our guess?
+    private boolean speak = false;
+
+    //number range
+    private int total = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -35,14 +50,46 @@ public class MainActivity extends Activity {
         //reset our attempts to 0
         attempts = 0;
 
+        //number range
+        total = 100;
+
+        //get our shared preferences
+        SharedPreferences preferences = getSharedPreferences(getString(R.string.key_shared_preferences), MODE_PRIVATE);
+
+        //load the value
+        if (preferences != null) {
+
+            //get our saved value
+            total = preferences.getInt(getString(R.string.key_random), 100);
+
+            //update the number range displayed
+            TextView textView = findViewById(R.id.myInstructions);
+            textView.setText("Guess a # 1 - " + total);
+
+            vibrate = preferences.getBoolean(getString(R.string.key_vibrate), true);
+
+            speak = preferences.getBoolean(getString(R.string.key_input), true);
+
+            //if we are speaking, hide the ui
+            if (speak) {
+
+                EditText editText = findViewById(R.id.editText);
+                editText.setVisibility(View.INVISIBLE);
+
+                Button button = findViewById(R.id.buttonGuess);
+                button.setVisibility(View.INVISIBLE);
+            }
+        }
+
         //generate our random number between 1 - 100
-        random = new Random().nextInt(100) + 1;
+        random = new Random().nextInt(total) + 1;
 
         //display our random number generated
         System.out.println("Random number generated: " + random);
 
         //start the speech input
-        promptSpeechInput();
+        if (speak)
+            promptSpeechInput();
     }
 
     /**
@@ -61,6 +108,7 @@ public class MainActivity extends Activity {
 
             //make sure that we came from the google speech recognition activity
             case REQ_CODE_SPEECH_INPUT: {
+
                 if (resultCode == RESULT_OK && data != null) {
 
                     //google returns all variations of what you are saying (example "50", "fifty", "fif tee", etc....)
@@ -114,13 +162,50 @@ public class MainActivity extends Activity {
             boolean success = performGuess(guess);
 
             //if we didn't guess the correct number, continue with speech input
-            if (!success)
+            if (!success) {
                 promptSpeechInput();
+            } else {
+                vibrate();
+            }
 
         } else {
 
             //no guess was detected, prompt again for input
             promptSpeechInput();
+        }
+    }
+
+    private void vibrate() {
+
+        if (vibrate) {
+
+            //obtain our vibrator object
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+            //vibrate phone for 500 milliseconds
+            v.vibrate(500);
+        }
+    }
+
+    public void performGuess(View view) {
+
+        //obtain our ui to get the guess
+        EditText editText = findViewById(R.id.editText);
+
+        //obtain our guess
+        int guess = Integer.parseInt(editText.getText().toString());
+
+        //perform the guess
+        boolean result = performGuess(guess);
+
+        //remove entry
+        editText.setText("");
+
+        //if successful, disable guess button
+        if (result) {
+            vibrate();
+            Button button = findViewById(R.id.buttonGuess);
+            button.setEnabled(false);
         }
     }
 
@@ -200,7 +285,7 @@ public class MainActivity extends Activity {
         //supply parameters that google's speech input allow us to customize
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.speech_prompt));
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak a # 1 - " + total);
 
         try {
             //start the activity for speech recognition

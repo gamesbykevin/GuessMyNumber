@@ -6,12 +6,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- text view to display the game instructions -->
-    <TextView style="@style/textViewStyle" android:text="@string/instructions" android:textColor="@color/colorPrimary" />
+    <TextView style="@style/textViewStyle" android:text="@string/instructions" android:textColor="@color/colorPrimary" android:id="@+id/myInstructions" />
 
     <!-- display the status of our guess here, "higher, lower, correct"-->
     <TextView style="@style/textViewStyle" android:text="Status Message Here!" android:id="@+id/textViewStatus" android:textColor="@color/colorPrimaryDark" />
 
     <!-- this will display the user's guess that they speak -->
     <TextView style="@style/textViewStyle" android:text="My Guess Here!" android:id="@+id/textViewGuess" android:textColor="@color/colorAccent" />
+
+    <EditText
+        android:inputType="number"
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:onClick="performGuess"
+        android:id="@+id/buttonGuess"
+        android:text="Guess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
