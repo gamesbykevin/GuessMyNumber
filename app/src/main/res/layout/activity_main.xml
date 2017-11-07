@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    style="@style/activityBackground"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- text view to display the game instructions -->
-    <TextView style="@style/textViewStyle" android:text="@string/instructions" android:textColor="@color/colorPrimary" android:id="@+id/myInstructions" />
+    <TextView style="@style/textViewStyleGame" android:text="@string/instructions" android:textColor="@color/colorPrimary" android:id="@+id/myInstructions" />
 
     <!-- display the status of our guess here, "higher, lower, correct"-->
-    <TextView style="@style/textViewStyle" android:text="Status Message Here!" android:id="@+id/textViewStatus" android:textColor="@color/colorPrimaryDark" />
+    <TextView style="@style/textViewStyleGame" android:text="Status Message Here!" android:id="@+id/textViewStatus" android:textColor="@color/colorPrimaryDark" />
 
     <!-- this will display the user's guess that they speak -->
-    <TextView style="@style/textViewStyle" android:text="My Guess Here!" android:id="@+id/textViewGuess" android:textColor="@color/colorAccent" />
+    <TextView style="@style/textViewStyleGame" android:text="My Guess Here!" android:id="@+id/textViewGuess" android:textColor="@color/colorAccent" />
 
     <EditText
         android:inputType="number"
@@ -27,4 +25,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <WebView
+        android:scrollbars="none"
+        android:visibility="invisible"
+        android:id="@+id/webView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></WebView>
 </LinearLayout>

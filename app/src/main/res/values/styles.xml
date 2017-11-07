@@ -5,10 +5,26 @@
         <!-- Customize this theme here. -->
     </style>
 
+
+    <style name="activityBackground">
+        <item name="android:background">@drawable/background</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
     <!-- this is a custom style I created since all my textViews will look the same -->
-    <style name="textViewStyle">
+    <style name="textViewStyleGame">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">25sp</item>
+    </style>
+
+    <!-- this is a custom style I created since all my textViews will look the same -->
+    <style name="textViewStyleMenu">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:background">@drawable/button</item>
     </style>
 </resources>

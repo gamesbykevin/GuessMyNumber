@@ -23,11 +23,13 @@ public class OptionsActivity extends Activity {
             //access values so we can save to shared preferences
             ToggleButton button1 = (ToggleButton)findViewById(R.id.buttonVibrate);
             ToggleButton button2 = (ToggleButton)findViewById(R.id.buttonInput);
+            ToggleButton button3 = (ToggleButton)findViewById(R.id.buttonSound);
             EditText editText = (EditText)findViewById(R.id.textRandom);
 
             //update the button settings
             button1.setChecked(preferences.getBoolean(getString(R.string.key_vibrate), true));
             button2.setChecked(preferences.getBoolean(getString(R.string.key_input), true));
+            button3.setChecked(preferences.getBoolean(getString(R.string.key_sound), true));
 
             //update the text box
             editText.setText(preferences.getInt(getString(R.string.key_random), 100) + "");
@@ -46,11 +48,13 @@ public class OptionsActivity extends Activity {
         //access values so we can save to shared preferences
         ToggleButton button1 = (ToggleButton)findViewById(R.id.buttonVibrate);
         ToggleButton button2 = (ToggleButton)findViewById(R.id.buttonInput);
+        ToggleButton button3 = (ToggleButton)findViewById(R.id.buttonSound);
         EditText editText = (EditText)findViewById(R.id.textRandom);
 
         //store the boolean value
         edit.putBoolean(getString(R.string.key_vibrate), button1.isChecked());
         edit.putBoolean(getString(R.string.key_input), button2.isChecked());
+        edit.putBoolean(getString(R.string.key_sound), button3.isChecked());
 
         //default 100
         int number = 100;

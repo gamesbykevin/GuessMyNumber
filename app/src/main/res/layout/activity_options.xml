@@ -2,26 +2,33 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    style="@style/activityBackground"
     tools:context="com.gamesbykevin.guessmynumber.OptionsActivity">
 
     <!-- vibrate setting on/off -->
     <ToggleButton
         android:id="@+id/buttonVibrate"
-        android:textOn="Vibrate On"
-        android:textOff="Vibrate Off"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:textOn="@string/options_text_vibrate_on"
+        android:textOff="@string/options_text_vibrate_off"
+        style="@style/textViewStyleMenu"
+        />
+
+    <!-- sound setting on/off -->
+    <ToggleButton
+        android:id="@+id/buttonSound"
+        android:textOn="@string/options_text_sound_on"
+        android:textOff="@string/options_text_sound_off"
+        style="@style/textViewStyleMenu"
+        />
+
 
     <!-- input setting speak/type -->
     <ToggleButton
         android:id="@+id/buttonInput"
-        android:textOn="Input: Speak"
-        android:textOff="Input: Keyboard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:textOn="@string/options_text_input_speak"
+        android:textOff="@string/options_text_input_type"
+        style="@style/textViewStyleMenu"
+        />
 
     <!-- random number range -->
     <EditText

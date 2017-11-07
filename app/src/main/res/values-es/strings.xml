@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name = "menu_text_start"> Start </string>
+    <string name = "menu_text_options"> Opciones </string>
+    <string name = "menu_text_exit"> Salir </string>
+
+    <string name = "options_text_vibrate_on"> Vibrar: en </string>
+    <string name = "options_text_vibrate_off"> Vibrar: desactivado </string>
+    <string name = "options_text_input_speak"> Entrada: speak </string>
+    <string name = "options_text_input_type"> Entrada: escriba </string>
+
+    <string name = "speech_prompt"> Hablar un número </string>
+    <string name = "speech_not_supported"> Speech not supported </string>
+    <string name = "guess_higher"> Superior </string>
+    <string name = "guess_lower"> Inferior </string>
+    <string name = "guess_correct"> ¡Correcto! Intentos - </string>
+    <string name = "instructions"> Adivina un número </string>
+
+</resources>

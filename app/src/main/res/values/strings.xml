@@ -1,17 +1,30 @@
 <resources>
-    <string name="app_name">GuessMyNumber</string>
-    <string name="speech_prompt">Speak a # 1 - 100</string>
+    <string translatable="false" name="app_name">GuessMyNumber</string>
+
+    <string name="menu_text_start">Start</string>
+    <string name="menu_text_options">Options</string>
+    <string name="menu_text_exit">Exit</string>
+
+    <string name="options_text_vibrate_on">Vibrate: on</string>
+    <string name="options_text_vibrate_off">Vibrate: off</string>
+    <string name="options_text_sound_on">Sound: on</string>
+    <string name="options_text_sound_off">Sound: off</string>
+    <string name="options_text_input_speak">Input: speak</string>
+    <string name="options_text_input_type">Input: type</string>
+
+    <string name="speech_prompt">Speak a number</string>
     <string name="speech_not_supported">Speech not supported</string>
     <string name="guess_higher">Higher</string>
     <string name="guess_lower">Lower</string>
     <string name="guess_correct">Correct!! Attempts - </string>
-    <string name="instructions">Guess a # 1 - 100</string>
+    <string name="instructions">Guess a number</string>
 
     <!-- our shared preferences hashmap key -->
-    <string name="key_shared_preferences">key_shared_preferences</string>
+    <string translatable="false" name="key_shared_preferences">key_shared_preferences</string>
 
     <!-- how we will access each shared preference-->
-    <string name="key_vibrate">key_vibrate</string>
-    <string name="key_input">key_input</string>
-    <string name="key_random">key_random</string>
+    <string translatable="false" name="key_sound">key_sound</string>
+    <string translatable="false" name="key_vibrate">key_vibrate</string>
+    <string translatable="false" name="key_input">key_input</string>
+    <string translatable="false" name="key_random">key_random</string>
 </resources>

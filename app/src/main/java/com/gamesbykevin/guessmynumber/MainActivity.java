@@ -2,15 +2,23 @@ package com.gamesbykevin.guessmynumber;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.speech.RecognizerIntent;
+import android.text.InputType;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +39,9 @@ public class MainActivity extends Activity {
 
     //do we vibrate the phone when the number is entered correctly
     private boolean vibrate = false;
+
+    //do we play sound effects
+    private boolean sound = false;
 
     //do we speak our guess?
     private boolean speak = false;
@@ -64,18 +75,17 @@ public class MainActivity extends Activity {
 
             //update the number range displayed
             TextView textView = findViewById(R.id.myInstructions);
-            textView.setText("Guess a # 1 - " + total);
+            textView.setText(getString(R.string.instructions) + " 1 - " + total);
 
             vibrate = preferences.getBoolean(getString(R.string.key_vibrate), true);
-
             speak = preferences.getBoolean(getString(R.string.key_input), true);
+            sound = preferences.getBoolean(getString(R.string.key_sound), true);
 
             //if we are speaking, hide the ui
             if (speak) {
 
                 EditText editText = findViewById(R.id.editText);
                 editText.setVisibility(View.INVISIBLE);
-
                 Button button = findViewById(R.id.buttonGuess);
                 button.setVisibility(View.INVISIBLE);
             }
@@ -165,13 +175,41 @@ public class MainActivity extends Activity {
             if (!success) {
                 promptSpeechInput();
             } else {
-                vibrate();
+                win();
             }
 
         } else {
 
             //no guess was detected, prompt again for input
             promptSpeechInput();
+        }
+    }
+
+    private void win() {
+
+        //vibrate phone
+        vibrate();
+
+        //play sound effect
+        playSound();
+
+        //show fireworks
+        WebView wv = (WebView)findViewById(R.id.webView);
+        wv.setVisibility(View.VISIBLE);
+        wv.getSettings().setUseWideViewPort(true);
+        wv.loadUrl("http://bestanimations.com/Holidays/Fireworks/fireworks/ba-awesome-colorful-fireworks-animated-gif-image-s.gif");
+    }
+
+    private void playSound() {
+
+        //only play sound if sound enabled
+        if (sound) {
+
+            //set up MediaPlayer with our sound effect
+            MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.win);
+
+            //start playing the sound
+            mp.start();
         }
     }
 
@@ -203,7 +241,14 @@ public class MainActivity extends Activity {
 
         //if successful, disable guess button
         if (result) {
-            vibrate();
+
+            //hide keyboard
+            if (getCurrentFocus() != null) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            }
+
+            win();
             Button button = findViewById(R.id.buttonGuess);
             button.setEnabled(false);
         }
@@ -285,7 +330,7 @@ public class MainActivity extends Activity {
         //supply parameters that google's speech input allow us to customize
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak a # 1 - " + total);
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.instructions));
 
         try {
             //start the activity for speech recognition
